@@ -82,13 +82,14 @@ int main() {
 
 	reset(a,3000);
 	while( fgets(a, 3000, fptr) != NULL ) {
-
-
-		//input
+		
+		
+		
+		//if input
 		if (a[0] == 'i' && a[1] == 'n' && a[2]== 'p' && a[3]== 'u' && a[4]== 't') {
 			int i;
 			for (i = 0; i <3000; i++) {
-				if (a[i] == ' ') {
+				if (a[i] == ' ') { //mark first variable after space, reminder after , and before;
 					num = i+1;
 				}
 
@@ -121,6 +122,7 @@ int main() {
 		}
 
 		//output
+		//mark first variable after space, reminder after , and before;
 		else if (a[0] == 'o' && a[1] == 'u' && a[2]== 't' && a[3]== 'p' && a[4]== 'u' && a[5]== 't') {
 			int i;
 			for (i = 0; i <3000; i++) {
@@ -157,6 +159,7 @@ int main() {
 		}
 
 		//wire
+		//mark first variable after space, reminder after , and before;
 		else if (a[0] == 'w' && a[1] == 'i' && a[2]== 'r' && a[3]== 'e') {
 			int i;
 			for (i = 0; i <3000; i++) {
@@ -192,7 +195,7 @@ int main() {
 				}
 			}
 		}
-
+		//mark first variable after space, reminder after , and before;
 		//reg
 		else if (a[0] == 'r' && a[1] == 'e' && a[2]== 'g') {
 			int i;
@@ -210,7 +213,7 @@ int main() {
 						num++;
 					}
 					num = i+1;
-					
+					//Number of corresponding states/ nets for ffs are stored in n_reg[]
 					reg_location[n_reg] = number_of_variables;
 					number_of_variables ++;
 					n_reg++;
@@ -233,11 +236,11 @@ int main() {
 				}
 			}
 		}
-		//AND
+		//AND Counting for number of clauses
 		else if (a[0] == 'a' && a[1] == 'n' && a[2]== 'd') {
 			number_of_clauses = number_of_clauses + (3*n_transition);
 		}
-		//NOT
+		//NOT Counting for number of clauses
 		else if (a[0] == 'n' && a[1] == 'o' && a[2]== 't') {
 			number_of_clauses = number_of_clauses + (2*n_transition);
 		}
@@ -250,7 +253,7 @@ int main() {
 	
 	nclause = ((n_transition-1)*n_reg)*2;
 	
-	nclause = number_of_clauses + nclause+n_reg;
+	nclause = number_of_clauses + nclause+n_reg+n_reg;
 
 	
 	
@@ -320,16 +323,26 @@ int main() {
 	
 	fprintf(fnew, "%s", writebuffer);
 	reset(writebuffer,100);
-	fprintf(fnew, "%s", "\nc");
+	fprintf(fnew, "%s", "\nc Initial Condition\n");
 	
+	//set initial condition
 	
+	for (i=0;i<n_reg;i++){
+	//	reg_location[i]	;
+		fprintf(fnew, "%s", "-");
+		sprintf(writebuffer, "%i", reg_location[i]);
+		fprintf(fnew, "%s", writebuffer);
+		reset(writebuffer,100);
+		fprintf(fnew, "%s", " 0\n");
+	}
+	fprintf(fnew, "%s", "c");
 	fclose(fptr);
 	
 	
 	fptr = fopen(filename, "r");
 	reset(a,3000);
 
-	
+	//Scan line by line for Gates. Extract the variable name after and between ( , ) find the corresponding number in array variable[] and write the dimacs file
 	while( fgets(a, 3000, fptr) != NULL ) {
 		//AND
 		if (a[0] == 'a' && a[1] == 'n' && a[2]== 'd') {
@@ -417,6 +430,9 @@ int main() {
 					}
 				}
 			}
+			
+			
+			//writing dimacs
 			
 			int ncount = 0;
 			while(ncount < n_transition)
