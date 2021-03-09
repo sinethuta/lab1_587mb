@@ -1,0 +1,34 @@
+p cnf 12 22
+c first line "p cnf num_variables num_clauses"
+c initial condition is 0 for both state bits
+-6 0
+-5 0
+c
+c first unrolling of transition relation...
+1 -2 0
+5 -2 0
+-1 -5 2 0
+-2 -3 0
+2 3 0
+-4 -6 0
+4 6 0
+c
+c second unrolling of transition relation...
+7 -8 0
+11 -8 0
+-7 -11 8 0
+-8 -9 0
+8 9 0
+-10 -12 0
+10 12 0
+c
+c output of 1st transition rel. are inputs of 2nd
+-3 11 0
+3 -11 0
+-4 12 0
+4 -12 0
+c
+c can we reach state 01 as 2nd state after initial?
+-10 0
+9 0 
+
