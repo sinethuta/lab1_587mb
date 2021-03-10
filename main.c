@@ -846,6 +846,7 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	
 	strcat(command,"minisat ");
 	strcat(command,writefilename);
+	strcat(command," ");
 	strcat(command,outputfile);
 	
 	
