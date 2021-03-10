@@ -1,69 +1,23 @@
 c DIMACS CONVERSION: ex1.v
 c
-c Number of Variable = 16
-c Number of Clauses = 30
+c Number of Variable = 0
+c Number of Clauses = 0
 c PRINT VARIABLE LIST
-c   1     ; 9     ; clock
-c   2     ; 10    ; A
-c   3     ; 11    ; Y
-c   4     ; 12    ; S0
-c   5     ; 13    ; S1
-c   6     ; 14    ; X1
-c   7     ; 15    ; NS0
-c   8     ; 16    ; NS1
+c   clock
+c   A
+c   Y
+c   S0
+c   S1
+c   X1
+c   NS0
+c   NS1
 c
-p cnf 16 30
+p cnf 0 0
 c Initial Condition
 -4 0
 -5 0
 c
-c and g0(X1,S0,S1);
-4 -6 0
-5 -6 0
--4 -5 6 0
-c
-c and g0(X1,S0,S1);
-12 -14 0
-13 -14 0
--12 -13 14 0
-c
-c and g1(NS1,A,X1);
-2 -8 0
-6 -8 0
--2 -6 8 0
-c
-c and g1(NS1,A,X1);
-10 -16 0
-14 -16 0
--10 -14 16 0
-c
-c not g2(NS0,X1);
--6 -7 0
-6 7 0
-c
-c not g2(NS0,X1);
--14 -15 0
-14 15 0
-c
-c and g3(Y,A,X1);
-2 -3 0
-6 -3 0
--2 -6 3 0
-c
-c and g3(Y,A,X1);
-10 -11 0
-14 -11 0
--10 -14 11 0
-c
-c Transition Buffer
--4 15 0
-4 -15 0
-c
-c Transition Buffer
--5 16 0
-5 -16 0
-c
 c FINAL Condition 
-15 0
-16 0
+-1 0
+0 0
 c END OF DIMACS CNF

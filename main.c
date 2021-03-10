@@ -857,8 +857,17 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	
 	strcat(command,"cat ");
 	strcat(command,outputfile);
-	
-	printf("\nVIEWING OUTPUT FILE: %s\n",outputfile);
+	printf("\n\nFilename: %s\nNo. of Transition: %d\nFinal States: \n",filename,n_transition);
+	i = 0;
+	while( i < fcount ){
+			printf("S%d : %d  ",i,state[i]);
+			if (i%10 == 0){
+				printf("\n");
+			}
+			
+			i++;
+		}
+	printf("\n\nVIEWING OUTPUT FILE: %s\n",outputfile);
 	system(command);
 	printf("\n\nEND OF PROGRAM\n");
 	
