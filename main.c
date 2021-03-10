@@ -849,7 +849,7 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	strcat(command," ");
 	strcat(command,outputfile);
 	
-	printf("\n\n VIEWING OUTPUT FILE: %s\n",outputfile);
+
 	
 	
 	system(command);
@@ -858,9 +858,9 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	strcat(command,"cat ");
 	strcat(command,outputfile);
 	
-	
+	printf("\nVIEWING OUTPUT FILE: %s\n",outputfile);
 	system(command);
-	reset(command,50);
+	printf("\n\nEND OF PROGRAM\n");
 	
 	return 0;
 
