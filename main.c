@@ -37,6 +37,7 @@ int main() {
 
 	char filename[20];
 	char writefilename[25];
+	char outputfile[25];
 	
 	printf("Insert Verilog Filename (w/o ext.): ");
 	scanf("%s", filename);
@@ -51,6 +52,11 @@ int main() {
 
 	strcpy(writefilename,filename);
 	strcat(writefilename,".dimacs");
+	
+	
+	
+	strcpy(outputfile,filename);
+	strcat(outputfile,".output");
 	
 	strcat(filename,".v");
 	fptr = fopen(filename, "r");
@@ -628,7 +634,7 @@ int main() {
 			}
 		}
 		
-		printf("Number of States Final Condition : %d\n",fcount); 
+		printf("\nNumber of States Final Condition : %d\n",fcount); 
 		
 		int f;
 		f = fcount;
@@ -654,7 +660,7 @@ int main() {
 		}	
 		i=0;
 		while( i < fcount ){
-			printf("S%d : %d ",i,state[i]);
+			printf("S%d : %d \n",i,state[i]);
 			i++;
 		}
 		
@@ -703,6 +709,7 @@ int main() {
 	
 	int in;
 	int out;
+	printf("\nBuffer Conditions\n",in,out);
 	
 	for (i=0; i < n_reg; i++){  //GO TRHOU EACH REGISTER FLOP
 		int ncount = 0;
@@ -710,9 +717,11 @@ int main() {
 		
 		out = reg_location[i];
 		
+		
+		
 		while(ncount < n_transition-1)
 		{
-		  printf("IN: %d OUT: %d \n",in,out);
+		  	printf("IN: %d OUT: %d \n",in,out);
 		  
 		  	
 			fprintf(fnew, "%s", "\nc Transition Buffer\n");
@@ -766,10 +775,7 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 			writebuffer[3] = a+'0';
 			writebuffer[4] = '\0';	
 		}
-	
-			
-	
-		printf("\n\ni= %d NSx?: %s\n",i,writebuffer);
+
 		
 		//search
 		char nums;
@@ -827,7 +833,32 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	fprintf(fnew, "%s", "\nc END OF DIMACS CNF");
 	fclose(fptr);
 	fclose(fnew);
-
+	printf("\nDimacs Conversion Done Successfully\n",in,out);
+	printf("\nCalling MiniSat Solver\n");
+	//system("minisat %s %s", writefilename,outputfile);
+	printf("\n\n VIEWING OUTPUT FILE: %s",outputfile);
+	
+	char command[50];
+	reset(command,50);
+	
+	
+	
+	
+	strcat(command,"minisat ");
+	strcat(command,writefilename);
+	strcat(command,outputfile);
+	
+	
+	system(command);
+	reset(command,50);
+	
+	strcat(command,"cat ");
+	strcat(command,outputfile);
+	
+	
+	system(command);
+	reset(command,50);
+	
 	return 0;
 
 
