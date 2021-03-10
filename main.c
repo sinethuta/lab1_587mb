@@ -835,8 +835,8 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	fclose(fnew);
 	printf("\nDimacs Conversion Done Successfully\n",in,out);
 	printf("\nCalling MiniSat Solver\n");
-	//system("minisat %s %s", writefilename,outputfile);
-	printf("\n\n VIEWING OUTPUT FILE: %s",outputfile);
+
+
 	
 	char command[50];
 	reset(command,50);
@@ -848,6 +848,8 @@ fprintf(fnew, "%s", "\nc FINAL Condition ");
 	strcat(command,writefilename);
 	strcat(command," ");
 	strcat(command,outputfile);
+	
+	printf("\n\n VIEWING OUTPUT FILE: %s\n",outputfile);
 	
 	
 	system(command);
